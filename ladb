@@ -1,0 +1,33 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+LCMD="$1"
+
+case $LCMD in
+start)
+    su shell -c 'setprop service.adb.tcp.port 9999'
+    su -c 'stop adbd && start adbd'
+    adb connect localhost:9999
+    sleep 4
+    adb devices
+    ;;
+stop)
+    adb disconnect localhost:9999
+    su shell -c 'setprop service.adb.tcp.port 0'
+    su -c 'stop adbd'
+    ;;
+uninstall)
+    read -p "Are you sure you want to uninstall LADB? (y/n) " REPLY
+    if [ $REPLY = "y" ]
+    then
+      cd ~/ && rm -f -rf ladb && rm -f $PREFIX/bin/ladb
+    fi
+    ;;
+*)
+    echo "LADB (Local Android Debug Bridge) v1.0"
+    echo "by github.com/sekedus"
+    echo " "
+    echo "commands:"
+    echo " start          Start LADB"
+    echo " stop           Stop LADB"
+    echo " uninstall      Uninstall LADB"
+esac

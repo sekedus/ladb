@@ -1,0 +1,12 @@
+#!$PREFIX/bin/bash
+
+rm -f $PREFIX/bin/ladb
+
+chmod +x ladb
+
+cp ladb $PREFIX/bin/
+
+echo "LADB installed sucessfully."
+echo "To use local ADB, run: ladb start"
+
+#ladb
