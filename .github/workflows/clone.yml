@@ -2,7 +2,8 @@ name: GitHub Clone Count Update Everyday
 
 on:
   schedule:
-    - cron: "0 */24 * * *"
+    # Runs at 12am UTC
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -69,12 +70,15 @@ jobs:
 
       - name: Update gist with latest count
         run: |
-          content=$(sed -e 's/\\/\\\\/g' -e 's/\t/\\t/g' -e 's/\"/\\"/g' -e 's/\r//g' "clone.json" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
-          echo '{"description": "Clone statistics: ${{ github.repository }}", "files": {"clone.json": {"content": "'"$content"'"}}}' > post_clone.json
-          curl -s -X PATCH \
-            --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d @post_clone.json https://api.github.com/gists/${{ steps.set_id.outputs.GIST }} > /dev/null 2>&1
+          if ! diff -q "clone.json" "clone_before.json" >/dev/null
+          then
+            content=$(sed -e 's/\\/\\\\/g' -e 's/\t/\\t/g' -e 's/\"/\\"/g' -e 's/\r//g' "clone.json" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
+            echo '{"description": "Clone statistics: ${{ github.repository }}", "files": {"clone.json": {"content": "'"$content"'"}}}' > post_clone.json
+            curl -s -X PATCH \
+              --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d @post_clone.json https://api.github.com/gists/${{ steps.set_id.outputs.GIST }} > /dev/null 2>&1
+            fi
 
       - name: Add badge comments
         run: |
@@ -101,12 +105,7 @@ jobs:
             comment_id=$(curl -s -X POST \
             --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d @post_comment.json https://api.github.com/gists/${{ secrets.GIST_ID }}/comments \
+            -d @post_comment.json https://api.github.com/gists/${{ steps.set_id.outputs.GIST }}/comments \
             | jq '.id')
             echo $comment_id | gh secret set GIST_COMMENT_ID
           fi
-
-      - name: Push
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
