@@ -73,7 +73,7 @@ jobs:
           if ! diff -q "clone.json" "clone_before.json" >/dev/null
           then
             content=$(sed -e 's/\\/\\\\/g' -e 's/\t/\\t/g' -e 's/\"/\\"/g' -e 's/\r//g' "clone.json" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
-            echo '{"description": "Clone statistics: ${{ github.repository }}", "files": {"clone.json": {"content": "'"$content"'"}}}' > post_clone.json
+            echo '{"description": "Clone statistics: https://github.com/${{ github.repository }}", "files": {"clone.json": {"content": "'"$content"'"}}}' > post_clone.json
             curl -s -X PATCH \
               --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
               -H "Content-Type: application/json" \

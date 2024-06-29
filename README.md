@@ -6,11 +6,13 @@ LADB - Local ADB Shell
 
 Connect ADB to Android itself without Wireless Debugging or USB connection on **rooted devices**.
 
+ㅤ
 ## Requirements
 
 - Rooted device
 - [Termux](https://github.com/termux/termux-app/releases/latest) **v0.118.0** or higher
 
+ㅤ
 ## Installation
 
 1. Enable Developer options & USB debugging on your device, [howto](https://developer.android.com/studio/debug/dev-options#enable)
@@ -20,7 +22,7 @@ Connect ADB to Android itself without Wireless Debugging or USB connection on **
 pkg update && pkg upgrade
 ```
 4. Grant root permission: `su`
-5. Back to home directory: `exit` or <kbd>Ctrl</kbd>+<kbd>D</kbd>
+5. Back to home directory: `exit` or <kbd>Ctrl</kbd>+<kbd>d</kbd>
 6. Install `adb` & clone this repo: 
 ```bash
 pkg install android-tools -y && cd ~/ && git clone https://github.com/sekedus/ladb.git
@@ -30,17 +32,20 @@ pkg install android-tools -y && cd ~/ && git clone https://github.com/sekedus/la
 cd ~/ladb && bash setup && cd ~/
 ```
 
+ㅤ
 ## Commands
 
 - ladb start
 - ladb stop
 - ladb uninstall
 
+ㅤ
 ## Credits
 
 - [Termux](https://github.com/termux/termux-app)
-- [Stack Overflow](https://stackoverflow.com/a/78537118/7598333)
+- [Stack Overflow](https://stackoverflow.com/a/78537118)
 
+ㅤ
 ## License
 
 LADB is licensed under the GNU General Public License v3.0. See the [LICENSE](https://github.com/sekedus/ladb/blob/main/LICENSE) file for more details.
