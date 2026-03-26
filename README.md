@@ -1,6 +1,6 @@
 # LADB
 
-[![GitHub repo size](https://img.shields.io/github/repo-size/sekedus/ladb?label=Size)](https://github.com/sekedus/ladb) [![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/sekedus/eed3f0da1937e765a801f14ad4230eb8/raw/clone.json)](https://github.com/MShawon/github-clone-count-badge) [![GitHub License](https://img.shields.io/github/license/sekedus/ladb?label=License)](https://github.com/sekedus/ladb/blob/main/LICENSE)
+[![GitHub repo size](https://img.shields.io/github/repo-size/sekedus/ladb?label=Size)](https://github.com/sekedus/ladb) [![GitHub License](https://img.shields.io/github/license/sekedus/ladb?label=License)](https://github.com/sekedus/ladb/blob/main/LICENSE)
 
 LADB - Local ADB Shell
 
