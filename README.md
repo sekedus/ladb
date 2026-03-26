@@ -23,9 +23,9 @@ pkg update && pkg upgrade
 ```
 4. Grant root permission: `su`
 5. Back to home directory: `exit` or <kbd>Ctrl</kbd>+<kbd>d</kbd>
-6. Install `adb` & clone this repo: 
+6. Install `git`, `adb`, & clone this repo: 
 ```bash
-pkg install android-tools -y && cd ~/ && git clone https://github.com/sekedus/ladb.git
+pkg install git android-tools -y && cd ~/ && git clone https://github.com/sekedus/ladb.git
 ```
 7. Install LADB: 
 ```bash
